@@ -11,8 +11,8 @@ class Cell{
     this.i = i;
     this.j = j;
     
-    x = i * cellSize;
-    y = j * cellSize;
+    x = i * width / rows;
+    y = j * height / cols;
   }
   
   Cell getNeighbor(){
@@ -24,10 +24,10 @@ class Cell{
     if(j - 1 >= 0){
       if(!cells[i][j - 1].visited) neighbor.add(cells[i][j - 1]);
     }
-    if(i + 1 < width / cellSize){
+    if(i + 1 < rows){
       if(!cells[i + 1][j].visited) neighbor.add(cells[i + 1][j]);
     }
-    if(j + 1 < height / cellSize){
+    if(j + 1 < cols){
       if(!cells[i][j + 1].visited) neighbor.add(cells[i][j + 1]);
     }
     
@@ -40,11 +40,11 @@ class Cell{
     if(highlight){
       fill(53, 122, 64);
       noStroke();
-      rect(x, y, cellSize, cellSize);
+      rect(x, y, width / rows, height / cols);
     }else if(visited){
       fill(40, 75, 99);
       noStroke();
-      rect(x, y, cellSize, cellSize);
+      rect(x, y, width / rows, height / cols);
     }
     
     //DRAW WALLS
@@ -52,19 +52,19 @@ class Cell{
     stroke(255);
     //up
     if(walls[0]){
-      line(x, y, x + cellSize, y);
+      line(x, y, x + width / rows, y);
     }
     //right
     if(walls[1]){
-      line(x + cellSize, y, x + cellSize, y + cellSize);
+      line(x + width / rows, y, x + width / rows, y + height / cols);
     }
     //down
     if(walls[2]){
-      line(x, y + cellSize, x + cellSize, y + cellSize);
+      line(x, y + height / cols, x + width / rows, y + height / cols);
     }
     //left
     if(walls[3]){
-      line(x, y, x, y + cellSize);
+      line(x, y, x, y + height / cols);
     }
   }
   

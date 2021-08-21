@@ -5,7 +5,9 @@
 // https://en.wikipedia.org/wiki/Maze_generation_algorithm
 import java.util.Stack;
 
-final int cellSize = 25;
+final int rows = 25;
+final int cols = 25;
+final boolean animated = true;
 
 Cell[][] cells;
 Stack<Cell> path;
@@ -14,9 +16,9 @@ Cell current;
 void setup(){
   size(600, 600);
   
-  cells = new Cell[width / cellSize][height / cellSize];
-  for(int x = 0; x < width / cellSize; x++){
-    for(int y = 0; y < height / cellSize; y++){
+  cells = new Cell[rows][cols];
+  for(int x = 0; x < rows; x++){
+    for(int y = 0; y < cols; y++){
       cells[x][y] = new Cell(x, y);
     }
   }
@@ -25,21 +27,27 @@ void setup(){
   current = cells[0][0];
   current.visited = true;
   path.add(current);
+  
+  if(!animated){
+    while(true){
+      if(generate())break; 
+    }
+  }
 }
 
 void draw(){
   background(53);
   
-  current.setHighlight(true);
-  
-  //DISPLAY ALL CELLS
-  for(int x = 0; x < cells.length; x++){
-    for(int y = 0; y < cells[x].length; y++){
-      cells[x][y].show();
-    }
+  if(animated){
+    current.setHighlight(true);
+    display();
+    generate();
+  }else{
+    display();
   }
-  
-  
+}
+
+boolean generate(){
   //GET NEXT CELL
   Cell next = current.getNeighbor();
   current.setHighlight(false);
@@ -54,7 +62,17 @@ void draw(){
       current = path.pop();
     }else{
       //MAZE DONE
-      noLoop();
+      return true;
+    }
+  }
+  return false;
+}
+
+void display(){
+  //DISPLAY ALL CELLS
+  for(int x = 0; x < cells.length; x++){
+    for(int y = 0; y < cells[x].length; y++){
+      cells[x][y].show();
     }
   }
 }
@@ -74,5 +92,11 @@ void removeWalls(Cell cur, Cell nex){
   }else if(cur.getJ() - nex.getJ() == -1){
     cur.walls[2] = false;
     nex.walls[0] = false;
+  }
+}
+
+void keyPressed(){
+  if(key == 'p' || key == 'P'){
+    saveFrame("maze-####.png");
   }
 }
