@@ -14,6 +14,7 @@ final int cols = 25;
 ```processing
 final boolean animated = true;
 ```
+- Press 'p' to save the maze in the current directory
 
 ## Example
 
