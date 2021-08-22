@@ -18,7 +18,7 @@ final boolean animated = true;
 - If a maze has been made, you can calculate the quickest path between to points
   - Use the left mouse button to set a start point
   - Use the right mouse button to set an end point
-  - Use the spacebar to show the quickest path between the points
+  - Delete the start / end point by clicking with the same mouse button on the cell, where the start/end currently is
 
 ## Example
 

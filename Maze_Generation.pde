@@ -19,7 +19,6 @@ Stack<Cell> path;
 Cell current;
 
 // Path finding
-boolean pathCalculated = false;
 Cell start = null;
 Cell end = null;
 ArrayList<Cell> openList;
@@ -63,7 +62,7 @@ void draw(){
     hoverCell();
     
     //draw path if a path was calculated
-    if(pathCalculated){
+    if(pathList.size() > 0){
       for(Cell cell: pathList){
         noStroke();
         fill(168, 111, 30);
@@ -137,7 +136,6 @@ void calculatePath(){
       
       if(current == end){
         createPath(current);
-        pathCalculated = true;
         return;
       }
       
@@ -184,10 +182,6 @@ void keyPressed(){
       saveFrame("maze-####.png");
     }
   }
-  
-  if(key == ' ' && start != null && end != null){
-    calculatePath();
-  }
 }
 
 void mousePressed(){
@@ -198,18 +192,21 @@ void mousePressed(){
   
   if(mouseButton == LEFT){
     //set start
-    start = cells[i][j];
+    start = start != cells[i][j] ? cells[i][j]: null;
+    
     resetAstar();
     
-    if(pathCalculated){
+    if(start != null && end != null){
       calculatePath();
     }
   }
   
   if(mouseButton == RIGHT){
     //set end
-    end = cells[i][j];
-    if(pathCalculated){
+    end = end != cells[i][j] ? cells[i][j]: null;
+    
+    if(end == null) resetAstar();
+    if(start != null && end != null){
       resetAstar();
       calculatePath();
     }
@@ -217,6 +214,7 @@ void mousePressed(){
 }
 
 void resetAstar(){
+  pathList.clear();
   openList.clear();
   openList.add(start);
   closedList.clear();
