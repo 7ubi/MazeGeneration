@@ -24,5 +24,7 @@ final boolean animated = true;
 
 ![Alt Text](/example.png)
 
+![Alt Text](/maze-0372.png)
+
 ## How to run
 Run code using [Processing](https://processing.org/)
