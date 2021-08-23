@@ -6,8 +6,8 @@
 // https://en.wikipedia.org/wiki/A*_search_algorithm
 import java.util.Stack;
 
-final int rows = 12;
-final int cols = 12;
+final int rows = 25;
+final int cols = 25;
 int cellWidth;
 int cellHeight;
 final boolean animated = false;
@@ -82,8 +82,6 @@ void draw(){
       fill(156, 48, 52);
       rect(end.x, end.y, cellWidth, cellHeight);
     }
-    
-    
     displayWalls();
   }else if(animated){
     if(!generate())current.setHighlight(true);
@@ -180,6 +178,12 @@ void keyPressed(){
   if(generated){
     if(key == 'p' || key == 'P'){
       saveFrame("maze-####.png");
+    }
+    
+    if(key == 'r' || key == 'R'){
+      setup();
+      start = null;
+      end = null;
     }
   }
 }
