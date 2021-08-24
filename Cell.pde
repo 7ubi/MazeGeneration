@@ -124,6 +124,18 @@ class Cell{
   float getF(){
     return f;
   }
+  
+  byte getSave(){
+    byte save = 0;
+    
+    for(int i = 0; i < walls.length; i++){
+      if(walls[i]){
+        save |= saveStates[i];
+      }
+    }
+    
+    return save;
+  }
 }
 
 void display(){
