@@ -18,7 +18,6 @@ final boolean animated = true;
 
 ### Pathfinding
 
-- Press 'p' to save an image of the maze in the current directory
 - Press 'r' to make a new maze
 - If a maze has been made, you can calculate the quickest path between to points
   - Use the left mouse button to set a start point
@@ -32,6 +31,7 @@ final boolean animated = true;
 ```processing
 String saveFile = "maze-24-8-2021-17-32-38.dat";
 ```
+- Press 'p' to save an image of the current frame in the current directory
 
 ## Example
 
